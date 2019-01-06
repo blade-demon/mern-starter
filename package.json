@@ -8,6 +8,7 @@
     "npm": "6.4.1"
   },
   "scripts": {
+    "lint": "node_modules/.bin/goodparts index.js --fix",
     "start": "node index.js"
   },
   "keywords": [],
@@ -16,5 +17,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "mongoose": "^5.4.2"
+  },
+  "devDependencies": {
+    "goodparts": "^1.2.1"
   }
 }
