@@ -1,0 +1,20 @@
+{
+  "name": "node-express-react-mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "10.12.0",
+    "npm": "6.4.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Ziwei",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.2"
+  }
+}
