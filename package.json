@@ -9,16 +9,21 @@
   },
   "scripts": {
     "lint": "node_modules/.bin/goodparts index.js --fix",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "Ziwei",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "mongoose": "^5.4.2"
+    "https-proxy-agent": "^2.2.1",
+    "mongoose": "^5.4.2",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
-    "goodparts": "^1.2.1"
+    "goodparts": "^1.2.1",
+    "nodemon": "^1.18.9"
   }
 }
