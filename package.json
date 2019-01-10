@@ -16,7 +16,9 @@
   "author": "Ziwei",
   "license": "ISC",
   "dependencies": {
+    "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.4",
+    "https-proxy-agent": "^2.2.1",
     "mongoose": "^5.4.2",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
