@@ -10,7 +10,9 @@
   "scripts": {
     "lint": "node_modules/.bin/goodparts index.js --fix",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "Ziwei",
@@ -22,10 +24,12 @@
     "mongoose": "^5.4.2",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
-    "passport-google-oauth20": "^1.0.0"
+    "passport-google-oauth20": "^1.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "goodparts": "^1.2.1",
     "nodemon": "^1.18.9"
-  }
+  },
+  "snyk": true
 }
