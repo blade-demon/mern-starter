@@ -8,9 +8,10 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "lint": "node_modules/.bin/goodparts index.js --fix",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "client": "yarn run start --prefix client",
+    "dev:server": "nodemon index.js",
+    "dev":"concurrently \"npm run dev:server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Ziwei",
@@ -25,7 +26,7 @@
     "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
-    "goodparts": "^1.2.1",
+    "concurrently": "^4.1.1",
     "nodemon": "^1.18.9"
   }
 }
