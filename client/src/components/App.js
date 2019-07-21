@@ -1,19 +1,18 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import './App.css';
-
-const Home = () => <div>Home</div>;
-const Surveys = () => <div>Surveys</div>;
+import Header from './Header';
+import Landing from './Landing';
+import Dashboard from './Dashboard';
 
 function App() {
 	return (
 		<div className='App'>
 			<header className='App-header'>
-				<h1>React Full Stack </h1>
+				<Header />
 				<Router>
 					<div>
-						<Route exact path='/' component={Home} />
-						<Route exact path='/surveys' component={Surveys} />
+						<Route exact path='/' component={Landing} />
+						<Route exact path='/dashboard' component={Dashboard} />
 					</div>
 				</Router>
 			</header>
