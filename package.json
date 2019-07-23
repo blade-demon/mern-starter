@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "client": "yarn run start --prefix client",
+    "client": "npm run start --prefix client",
     "dev:server": "nodemon index.js",
-    "dev":"concurrently \"npm run dev:server\" \"npm run client\""
+    "dev": "concurrently \"npm run dev:server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Ziwei",
