@@ -18,9 +18,9 @@ class App extends Component {
 		return (
 			<div className='App'>
 				<header className='App-header'>
-					<Header />
 					<Router>
 						<div>
+							<Header />
 							<Route exact path='/' component={Landing} />
 							<Route exact path='/surveys' component={Dashboard} />
 							<Route exact path='/surveys/new' component={Surveys} />
