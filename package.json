@@ -19,6 +19,7 @@
   "author": "Ziwei",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.19.1",
@@ -26,7 +27,8 @@
     "mongoose": "^5.4.2",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
-    "passport-google-oauth20": "^1.0.0"
+    "passport-google-oauth20": "^1.0.0",
+    "stripe": "^7.5.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
