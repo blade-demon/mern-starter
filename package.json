@@ -24,7 +24,7 @@
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.19.1",
-    "https-proxy-agent": "^2.2.1",
+    "https-proxy-agent": "^3.0.0",
     "mongoose": "^5.4.2",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
