@@ -26,7 +26,7 @@
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**Independent Test**: [Describe how this can be tested independently - name the automated test you will add in `tests/` or the React Testing Library suite]
 
 **Acceptance Scenarios**:
 
@@ -41,7 +41,7 @@
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Describe how this can be tested independently - include file path for the failing test that will be added]
 
 **Acceptance Scenarios**:
 
@@ -55,7 +55,7 @@
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Describe how this can be tested independently - include CI command or script that will run it]
 
 **Acceptance Scenarios**:
 
@@ -74,19 +74,6 @@
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
-
-## API Contracts & Shared Models *(mandatory)*
-
-| Endpoint / Event | Method | Auth Scope | Request Model (`models/*.js`) | Response Model | Error Contracts |
-|------------------|--------|------------|-------------------------------|----------------|-----------------|
-| `/api/...`       | GET    | [e.g., session cookie, OAuth scope] | [Link to contract file or schema] | [Link] | [List error codes] |
-
-**Shared Models Impacted**:
-
-- `[ModelName]`: [Describe new fields/validations and how React + Express reuse the same schema]
-- `[ModelName]`: [Explain whether migrations are needed]
-
-> Contracts MUST live in `/specs/[###-feature-name]/contracts/` and link back to this section to satisfy Constitution Principle II.
 
 ## Requirements *(mandatory)*
 
@@ -108,16 +95,26 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Security & Operations Requirements *(map to constitution principles IV & V)*
+
+- **SEC-001**: Secrets/configuration MUST be loaded via [config helper/environment variable] and kept out of client bundles.
+- **SEC-002**: Inputs touching MongoDB MUST validate [rules/fields] before persistence.
+- **OPS-001**: Logging MUST emit [request ID, user ID, action] for this feature with clear success/failure indicators.
+- **OPS-002**: Deployment plan MUST describe how to keep `npm run dev`, `npm run client`, and Heroku healthy plus rollback steps.
+- **OPS-003**: Observability/KPIs to monitor post-release: [e.g., payment success rate, auth errors].
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
 
-### Security & Data Stewardship Requirements *(mandatory)*
+## API Contracts *(mandatory for any API/data change)*
 
-- **SEC-001**: [Describe validation, sanitization, and Passport/OAuth scopes required]
-- **SEC-002**: [Describe secret handling + `.env.example` updates]
-- **SEC-003**: [List dependency or `snyk test` considerations, mitigations, or waivers]
+- **Contract Artifact Path**: `specs/[###-feature-name]/contracts/[name].md`
+- **Updated Endpoints**:
+  - `HTTP METHOD /route`: Auth [required?], Request schema `[link/summary]`, Response schema `[link/summary]`, Rate limiting/pagination `[details]`
+- **Error Handling**: [List error codes/object shapes, including validation failures]
+- **External Integrations**: [Document Stripe/OAuth touch points and how contracts shield the client]
 
 ## Success Criteria *(mandatory)*
 
@@ -132,9 +129,3 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
-
-## Operational Readiness & Observability *(mandatory)*
-
-- **Deployability**: [Describe how `npm run dev`, `npm run client`, and Heroku deploys remain green; include rollback steps if data changes]
-- **Logging & Metrics**: [List new log fields, monitoring dashboards, or alerts and where they live]
-- **Feature Flags / Cleanup**: [Document temporary toggles, owners, and removal criteria]

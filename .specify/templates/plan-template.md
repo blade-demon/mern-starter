@@ -3,7 +3,7 @@
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
 **Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
-**Note**: This template is filled in by the `/speckit.plan` command (see `.specify/scripts/bash/setup-plan.sh` for automation steps).
+**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
@@ -17,25 +17,25 @@
   the iteration process.
 -->
 
-**Language/Version**: Node.js 10.12 (Express API) + React 18 client (CRA)  
-**Primary Dependencies**: Express 4, Mongoose 5, Passport (Google/GitHub), Stripe SDK, Redux, Prettier  
-**Storage**: MongoDB Atlas-compatible cluster via Mongoose ODM  
-**Testing**: Jest + supertest (API contracts), React Testing Library + Cypress (UI journeys)  
-**Target Platform**: Heroku dynos (Node buildpack) with MongoDB Atlas/BaaS  
-**Project Type**: Web application (Express backend + React SPA frontend)  
-**Performance Goals**: API p95 latency < 200 ms, SPA interactive in < 3 s on broadband  
-**Constraints**: Must reuse shared Mongoose schemas, secrets via env vars, keep `npm run dev` green  
-**Scale/Scope**: Single repository for 1–2 concurrent feature teams, < 10 UI screens per release train
+**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [single/web/mobile - determines source structure]  
+**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Update the checklist below whenever scope changes.*
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-- [ ] **Full-Stack JavaScript Parity** – Enumerate server + client surfaces touched and cite the shared `models/` objects reused (no duplicate shapes).
-- [ ] **API Contract-First Delivery** – Link to `/specs/[###-feature-name]/contracts/*.md` that describe every request/response + auth rule.
-- [ ] **Test-Driven User Journeys** – List the failing tests that will be authored before implementation (API + UI) and how they cover each story.
-- [ ] **Secure Auth & Data Stewardship** – Describe secret handling, new validation middleware, and required `snyk test` or dependency work.
-- [ ] **Operational Readiness & Observability** – Explain logging/metrics updates, deployment plan, and rollback strategy for this feature.
+1. **MERN Stack Alignment**: Confirm the feature stays within MongoDB+Mongoose, Express, React, and Node.js using the shared models defined in `models/`.
+2. **Contract Ready**: Link to the REST/JSON contract under `specs/<feature>/contracts/` that will be defined or updated *before* any route/component work.
+3. **Journey Tests**: Describe the automated end-to-end test that will be written for each spec.md user story and identify where it will live (`tests/` or RTL).
+4. **Security & Ops**: Call out required secret handling, validation, and observability work plus the plan to keep `npm run dev`, `npm run client`, and Heroku deployable.
+5. **Compliance Evidence**: Note any waivers requested; otherwise, state how tasks/spec artifacts will show adherence to the constitution principles.
 
 ## Project Structure
 
@@ -47,32 +47,56 @@ specs/[###-feature]/
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)
 ├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # REST/JSON definitions required by Constitution Principle II
-└── tasks.md             # Phase 2 output (/speckit.tasks command)
+├── contracts/           # Phase 1 output (/speckit.plan command)
+└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
 ### Source Code (repository root)
+<!--
+  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
+  for this feature. Delete unused options and expand the chosen structure with
+  real paths (e.g., apps/admin, packages/something). The delivered plan must
+  not include Option labels.
+-->
 
 ```text
-index.js                # Express app + server bootstrap
-config/                 # Environment + service configuration helpers
-middlewares/            # Shared Express middleware (auth, validation, logging)
-models/                 # Mongoose schemas (single source of truth)
-routes/                 # API route handlers
-services/               # External service clients (Stripe, OAuth, etc.)
+# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
+src/
+├── models/
+├── services/
+├── cli/
+└── lib/
+
 tests/
-├── contract/           # API contract tests (supertest)
-└── integration/        # Full-stack journey tests + Cypress harness
-client/
+├── contract/
+├── integration/
+└── unit/
+
+# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
+backend/
 ├── src/
-│   ├── actions/
-│   ├── reducers/
+│   ├── models/
+│   ├── services/
+│   └── api/
+└── tests/
+
+frontend/
+├── src/
 │   ├── components/
-│   └── index.js        # React entry
-└── public/
+│   ├── pages/
+│   └── services/
+└── tests/
+
+# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
+api/
+└── [same as backend above]
+
+ios/ or android/
+└── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: [Document any subdirectories or new packages introduced by this feature and how they relate to the tree above]
+**Structure Decision**: [Document the selected structure and reference the real
+directories captured above]
 
 ## Complexity Tracking
 

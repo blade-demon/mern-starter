@@ -8,9 +8,9 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: Constitution Principle III makes test-first coverage mandatory for every user story. Author the failing tests listed in spec.md before writing implementation code.
+**Tests**: Constitution Principle III mandates at least one automated test per user story. Treat the test tasks below as REQUIRED blockers that must fail before implementation.
 
-**Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story. Reference the API contracts produced under `/specs/[###-feature-name]/contracts/`.
+**Organization**: Tasks are grouped by user story to enable independent implementation/testing while keeping contract, security, and ops work visible.
 
 ## Format: `[ID] [P?] [Story] Description`
 
@@ -44,24 +44,13 @@ description: "Task list template for feature implementation"
   ============================================================================
 -->
 
-## Phase 0: Contract & Test Preparation (Non-Negotiable Gate)
-
-**Purpose**: Enforce contract-first delivery, shared data models, and test planning before feature work begins.
-
-- [ ] T000 Record API/UX contracts in `/specs/[###-feature-name]/contracts/` (requests, responses, errors, auth scopes)
-- [ ] T001 Update shared `models/*.js` schemas + associated TypeScript/JSDoc definitions; document migrations if needed
-- [ ] T002 List and scaffold failing Jest/supertest + React Testing Library/Cypress specs covering each user story
-- [ ] T003 Define logging/metrics expectations and deployment plan, including rollback + feature flag strategy
-
----
-
 ## Phase 1: Setup (Shared Infrastructure)
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T010 Create project structure per implementation plan
-- [ ] T011 Initialize [language] project with [framework] dependencies
-- [ ] T012 [P] Configure linting and formatting tools
+- [ ] T001 Create project structure per implementation plan
+- [ ] T002 Initialize [language] project with [framework] dependencies
+- [ ] T003 [P] Configure linting and formatting tools
 
 ---
 
@@ -73,12 +62,14 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T020 Ensure MongoDB schemas + indexes account for new contracts (include migration + rollback notes)
-- [ ] T021 [P] Extend Passport strategies / session handling as required (include validation + rate limiting)
-- [ ] T022 [P] Expand Express routing + middleware scaffolding (body parsing, sanitization, logging)
-- [ ] T023 Create/update base models/entities and share them with both backend + client consumers
-- [ ] T024 Configure error handling, structured logging, and metrics emission for the new feature
-- [ ] T025 Setup environment configuration management + `.env.example` for new secrets
+- [ ] T004 Setup database schema and migrations framework
+- [ ] T005 [P] Implement authentication/authorization framework
+- [ ] T006 [P] Setup API routing and middleware structure
+- [ ] T007 Create base models/entities that all stories depend on
+- [ ] T008 Configure error handling and logging infrastructure
+- [ ] T009 Setup environment configuration management
+- [ ] T010 Define/refresh REST contracts in `specs/[###-feature-name]/contracts/` before editing routes/components
+- [ ] T011 Document ops/monitoring hooks needed to keep `npm run dev`, `npm run client`, and Heroku deployments healthy
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -90,21 +81,21 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (MANDATORY) ⚠️
+### Tests for User Story 1 (MANDATORY per constitution) ⚠️
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T100 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].js
-- [ ] T101 [P] [US1] Integration/UI test for [user journey] in tests/integration/test_[name].js or client/src/__tests__/
+- [ ] T012 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T013 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 1
 
-- [ ] T102 [P] [US1] Create [Entity1] model in src/models/[entity1].js
-- [ ] T103 [P] [US1] Create [Entity2] model in src/models/[entity2].js
-- [ ] T104 [US1] Implement [Service] in src/services/[service].js (depends on T102, T103)
-- [ ] T105 [US1] Implement [endpoint/feature] in routes/[location].js or client/src/[location].js per contract
-- [ ] T106 [US1] Add validation and error handling
-- [ ] T107 [US1] Add logging + metrics for user story 1 operations and document rollback
+- [ ] T014 [P] [US1] Create [Entity1] model in src/models/[entity1].py
+- [ ] T015 [P] [US1] Create [Entity2] model in src/models/[entity2].py
+- [ ] T016 [US1] Implement [Service] in src/services/[service].py (depends on T014, T015)
+- [ ] T017 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T018 [US1] Add validation and error handling
+- [ ] T019 [US1] Add logging/observability for user story 1 operations and update any touched contract docs
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -116,18 +107,17 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 2 (MANDATORY) ⚠️
+### Tests for User Story 2 (MANDATORY per constitution) ⚠️
 
-- [ ] T200 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].js
-- [ ] T201 [P] [US2] Integration/UI test for [user journey] in tests/integration/test_[name].js or client/src/__tests__/
+- [ ] T020 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T021 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 2
 
-- [ ] T202 [P] [US2] Create [Entity] model in src/models/[entity].js
-- [ ] T203 [US2] Implement [Service] in src/services/[service].js
-- [ ] T204 [US2] Implement [endpoint/feature] in routes/[location].js or client/src/[location].js
-- [ ] T205 [US2] Integrate with User Story 1 components (if needed)
-- [ ] T206 [US2] Harden validation/security checks and run `snyk test` for impacted dependencies
+- [ ] T022 [P] [US2] Create [Entity] model in src/models/[entity].py
+- [ ] T023 [US2] Implement [Service] in src/services/[service].py
+- [ ] T024 [US2] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T025 [US2] Integrate with User Story 1 components (if needed) and confirm contracts/tests stayed accurate
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -139,17 +129,16 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 3 (MANDATORY) ⚠️
+### Tests for User Story 3 (MANDATORY per constitution) ⚠️
 
-- [ ] T300 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].js
-- [ ] T301 [P] [US3] Integration/UI test for [user journey] in tests/integration/test_[name].js or client/src/__tests__/
+- [ ] T026 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T027 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 3
 
-- [ ] T302 [P] [US3] Create [Entity] model in models/[entity].js (shared with client)
-- [ ] T303 [US3] Implement [Service] in services/[service].js
-- [ ] T304 [US3] Implement [endpoint/feature] in routes/[location].js or client/src/[location].js
-- [ ] T305 [US3] Update monitoring/logging dashboards and cleanup feature flags
+- [ ] T028 [P] [US3] Create [Entity] model in src/models/[entity].py
+- [ ] T029 [US3] Implement [Service] in src/services/[service].py
+- [ ] T030 [US3] Implement [endpoint/feature] in src/[location]/[file].py and update observability hooks before rollout
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -163,12 +152,12 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] TXXX [P] Documentation updates in docs/ and specs/ (contracts, plan, spec cross-links)
+- [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
-- [ ] TXXX Run quickstart.md validation + `npm run dev` smoke test
+- [ ] TXXX Run quickstart.md validation
 
 ---
 
@@ -212,12 +201,12 @@ Examples of foundational tasks (adjust based on your project):
 
 ```bash
 # Launch all tests for User Story 1 together (if tests requested):
-Task: "Contract test for [endpoint] in tests/contract/test_[name].js"
-Task: "Integration test for [user journey] in tests/integration/test_[name].js"
+Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
+Task: "Integration test for [user journey] in tests/integration/test_[name].py"
 
 # Launch all models for User Story 1 together:
-Task: "Create [Entity1] model in src/models/[entity1].js"
-Task: "Create [Entity2] model in src/models/[entity2].js"
+Task: "Create [Entity1] model in src/models/[entity1].py"
+Task: "Create [Entity2] model in src/models/[entity2].py"
 ```
 
 ---
